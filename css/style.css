@@ -1,0 +1,144 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family:sans-serif;
+}
+
+nav{
+    height: 100px;
+    width: 100%;
+}
+.Budget {
+    border: solid 2px #fff;
+}
+.Budget{
+    background: #fff;
+    border-radius: 5px;
+}
+.menu{
+    height: 70px;
+}
+.options{
+    gap: 3rem;
+}
+.filter{
+    font-size:1.7rem;
+}
+.close{
+    font-size: 1.5rem;
+    color: black;
+}
+.close:hover{
+    cursor: pointer;
+    opacity: 0.5;
+}
+.add_portal{
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 6px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    width: 400px;
+    height: 400px;
+    overflow: hidden;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    z-index:4;
+    background: #fff;
+}
+.top{
+    margin: 0;
+    padding: 0;
+    height: 80px;
+    background:#2ECC71;
+    position: relative;
+}
+
+.overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width:100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 2;
+}
+
+form{
+    font-family: sans-serif;
+    padding: 1.2rem;
+}
+
+.submit-div{
+    display:flex ;
+    justify-content: flex-end;
+    margin-top: 4rem;
+}
+
+.transForm-income{
+    height: auto;
+    width: 90%;
+    margin-left:0.3rem ;
+    border-top-right-radius: 9px;
+    border-bottom-right-radius:9px ;
+    background: #2ecc7075;
+    color: black;
+    padding: 0.3rem;
+    margin: 1rem;
+}
+.transForm-expense{
+    background: rgba(255, 0, 0, 0.514);
+    height: auto;
+    width: 90%;
+    margin-left:0.3rem ;
+    border-top-right-radius: 9px;
+    border-bottom-right-radius:9px ;
+    color: black;
+    padding: 0.3rem;
+    margin: 1rem;
+}
+.delete:hover{
+    cursor: pointer;
+}
+
+.income,.expense{
+    height: 300px;
+}
+.add-income,.add-expense{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    padding: 7px;
+    background: #fff;
+    border-radius: 5px;
+    color: #2ECC71;
+    font-family:sans-serif;
+    font-weight: 400;
+    border: black 2px solid;
+    margin-left: 2rem;
+}
+.btns{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    padding: 10px;
+    background: #2ECC71;
+    border-radius: 5px;
+    color: #fff;
+    font-family:sans-serif;
+    font-weight: 400;
+    border: none;
+    margin-left: 1rem;
+}
+.btns:hover{
+    cursor: pointer;
+}
+.inputForm{
+    margin-top: 0.5rem;
+}
+.submit-btn{
+    background: #2ECC71;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 7px;
+}

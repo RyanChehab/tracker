@@ -37,6 +37,7 @@ add_income.addEventListener('click',function(){
     portal.classList.remove('d-none')
     const overlay = document.getElementById('overlay')
     overlay.classList.remove('d-none')
+    // form title
     const portal_title = document.getElementById('top-title')
     portal_title.innerText = 'Add Income';
     // inject the dynamic form
@@ -73,7 +74,10 @@ async function read(){
 
 async function create() {
     try{
-        const type = document.getElementById('type').value
+        const type = document.getElementById('type').value;
+        const amount = document.getElementById('amount').value;
+        const date = document.getElementById('date').value;
+        const description = document.getElementById('description').value;
 
         const response = await fetch('../backend/create.php',{
             method: 'POST',
@@ -113,6 +117,7 @@ function injectForm(type) {
         <form id="transactionForm">
             <div class="flex align-center gap-2">
                 <label for="number">Amount</label>
+                <input type="hidden" value=${type} id="type">
                 <input type="number" name="number" id="amount" placeholder="$" required>
             </div>
             <br><br><br>
@@ -132,6 +137,9 @@ function injectForm(type) {
 
     portal_top.append(form);
 }
+
+
+
 
 // function injectTransaction(data) {
 //     data.forEach(transaction=>{

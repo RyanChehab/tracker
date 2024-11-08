@@ -71,7 +71,21 @@ async function read(){
 }
 
 
+async function create() {
+    try{
 
+        const response = await fetch('../backend/create.php',{
+            method: 'POST',
+            headers:{
+                'Content-Type':'application/json'
+            }
+        });
+        const data = await response.json();
+
+    }catch(error){
+        console.error("Error sending data")
+    }
+}
 
 
 

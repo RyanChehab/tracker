@@ -138,7 +138,8 @@ function injectForm(type) {
     portal_top.append(form);
 }
 
-
+const saving_btn = document.getElementById('saving-btn');
+saving_btn.addEventListener('click',create);
 
 
 // function injectTransaction(data) {

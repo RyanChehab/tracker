@@ -72,40 +72,41 @@ async function read(){
 }
 
 
-async function create() {
-    try{
-        const type = document.getElementById('type').value;
-        const amount = document.getElementById('amount').value;
-        const date = document.getElementById('date').value;
-        const description = document.getElementById('description').value;
+async function create(event) {
 
-        const response = await fetch('../backend/create.php',{
+    event.preventDefault();
+
+    const type = document.getElementById('type').value;
+    const amount = document.getElementById('amount').value;
+    const date = document.getElementById('date').value;
+    const description = document.getElementById('description').value;
+
+    try{
+        const response = await fetch('./create.php',{
             method: 'POST',
             headers:{
                 'Content-Type':'application/json'
             },
-            body:JSON.stringify({
+            body: JSON.stringify({
                 type,
                 amount,
                 date,
-                notes
+                description,
             })
         });
         const data = await response.json();
+        console.log(data)
 
     }catch(error){
-        console.error("Error sending data")
+        console.error("Error sending data", error)
     }
 }
-
-
-
 
 function injectForm(type) {
     const portal_top = document.getElementById('portal_top');
 
     // If portal_top has a form, delete it
-    const existsForm = portal_top.querySelector('.Form');
+    const existsForm = portal_top.querySelector('.inputForm');
     if (existsForm) {
         portal_top.removeChild(existsForm);
     }
@@ -136,10 +137,16 @@ function injectForm(type) {
         </form>`;
 
     portal_top.append(form);
-}
-
+    
 const saving_btn = document.getElementById('saving-btn');
 saving_btn.addEventListener('click',create);
+saving_btn.addEventListener('click',()=>{
+    portal.classList.add('d-none')
+    const overlay = document.getElementById('overlay')
+    overlay.classList.add('d-none')
+})
+
+}
 
 
 // function injectTransaction(data) {

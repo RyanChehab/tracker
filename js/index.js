@@ -25,7 +25,7 @@ expense.addEventListener('click', function() {
     toggleSheet(expense_sheet, income_sheet);
 });
 
-// close portal
+// close portal by the x btn
 const close_btn = document.getElementById('close_btn')
 close_btn.addEventListener('click',function(){
     portal.classList.add('d-none')
@@ -39,7 +39,7 @@ add_income.addEventListener('click',function(){
     overlay.classList.remove('d-none')
     const portal_title = document.getElementById('top-title')
     portal_title.innerText = 'Add Income';
-     // calling to inject the dynamic form
+    // inject the dynamic form
     injectForm("income")
 })
 
@@ -73,12 +73,19 @@ async function read(){
 
 async function create() {
     try{
+        const type = document.getElementById('type').value
 
         const response = await fetch('../backend/create.php',{
             method: 'POST',
             headers:{
                 'Content-Type':'application/json'
-            }
+            },
+            body:JSON.stringify({
+                type,
+                amount,
+                date,
+                notes
+            })
         });
         const data = await response.json();
 
@@ -90,41 +97,41 @@ async function create() {
 
 
 
-// function injectForm(type) {
-//     const portal_top = document.getElementById('portal_top');
+function injectForm(type) {
+    const portal_top = document.getElementById('portal_top');
 
-//     // If portal_top has a form, delete it
-//     const existsForm = portal_top.querySelector('.Form');
-//     if (existsForm) {
-//         portal_top.removeChild(existsForm);
-//     }
+    // If portal_top has a form, delete it
+    const existsForm = portal_top.querySelector('.Form');
+    if (existsForm) {
+        portal_top.removeChild(existsForm);
+    }
 
-//     // Create form based on type (income or expense)
-//     let form = document.createElement('div');
-//     form.classList.add("inputForm");
-//     form.innerHTML = `
-//         <form id="transactionForm">
-//             <div class="flex align-center gap-2">
-//                 <label for="number">Amount</label>
-//                 <input type="number" name="number" id="amount" placeholder="$" required>
-//             </div>
-//             <br><br><br>
-//             <div class="flex align-center gap-3">
-//                 <label for="date">Date</label>
-//                 <input type="date" id="date" required>
-//             </div>  
-//             <br><br><br>
-//             <div class="flex gap-1">
-//                 <label for="description">Description</label>
-//                 <input type="text" id="description" required>
-//             </div>
-//             <div class="submit-div">
-//                 <button class="submit-btn" id="saving-btn" type="submit">Save</button>
-//             </div>
-//         </form>`;
+    // Create form based on type (income or expense)
+    let form = document.createElement('div');
+    form.classList.add("inputForm");
+    form.innerHTML = `
+        <form id="transactionForm">
+            <div class="flex align-center gap-2">
+                <label for="number">Amount</label>
+                <input type="number" name="number" id="amount" placeholder="$" required>
+            </div>
+            <br><br><br>
+            <div class="flex align-center gap-3">
+                <label for="date">Date</label>
+                <input type="date" id="date" required>
+            </div>  
+            <br><br><br>
+            <div class="flex gap-1">
+                <label for="description">Description</label>
+                <input type="text" id="description" required>
+            </div>
+            <div class="submit-div">
+                <button class="submit-btn" id="saving-btn" type="submit">Save</button>
+            </div>
+        </form>`;
 
-//     portal_top.append(form);
-
+    portal_top.append(form);
+}
 
 // function injectTransaction(data) {
 //     data.forEach(transaction=>{

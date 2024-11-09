@@ -171,7 +171,11 @@ function  displayTransaction(data){
                      <p>Date: ${transaction.date}</p>
                     <p>Description: ${transaction.notes}</p>
               </div>`;
-              
+              if (transaction.type === "income"){
+                income_sheet.appendChild(form)
+              }else{
+                expense_sheet.appendChild(form)
+              }
         })
 }
         

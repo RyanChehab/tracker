@@ -7,6 +7,7 @@ const add_income = document.getElementById('add-income');
 let balance=0;
 const budget = document.getElementById('budget');
 
+
 // toggele showing the transaction pages
 function toggleSheet(showSheet, hideSheet) {
     showSheet.classList.remove('d-none');
@@ -18,7 +19,6 @@ function toggleSheet(showSheet, hideSheet) {
 // Event listeners for income and expense buttons
 income.addEventListener('click', function() {
     toggleSheet(income_sheet, expense_sheet);
-    console.log("work")
 });
 
 expense.addEventListener('click', function() {
@@ -56,21 +56,29 @@ add_expense.addEventListener('click',function(){
     injectForm("expense")
 })
 
+// retrieve the transactions
 async function read(){
     try{
-        const response = await fetch('../backend/read.php',{
+        const response = await fetch('backend/read.php',{
             method: 'POST',
             headers:{
                 'Content-Type':'application/json'
             }    
         });
         const data = await response.json();
+        console.log(data)
         displayTransaction(data);
     } catch(error){
         console.error("Error fetching transaction:", error);
     }
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+    read(); // Automatically call read() when the page loads
+});
+
+
+// async function to create transactions
 
 async function create(event) {
 
@@ -82,7 +90,7 @@ async function create(event) {
     const description = document.getElementById('description').value;
 
     try{
-        const response = await fetch('./create.php',{
+        const response = await fetch('backend/create.php',{
             method: 'POST',
             headers:{
                 'Content-Type':'application/json'
@@ -137,9 +145,10 @@ function injectForm(type) {
         </form>`;
 
     portal_top.append(form);
-    
-const saving_btn = document.getElementById('saving-btn');
+    const saving_btn = document.getElementById('saving-btn');
 saving_btn.addEventListener('click',create);
+
+// cloing the portal when saving 
 saving_btn.addEventListener('click',()=>{
     portal.classList.add('d-none')
     const overlay = document.getElementById('overlay')
@@ -147,8 +156,25 @@ saving_btn.addEventListener('click',()=>{
 })
 
 }
-
-
+// display the transactions in their correct sheets
+function  displayTransaction(data){
+    data.forEach(transaction=>{
+                const form = document.createElement('div')
+                form.innerHTML = `
+                <div class="transForm-${transaction.type}" >
+                     <div class="flex space-between m-1">
+                         <p>${transaction.type}</p>
+                         <i class="delete fas fa-minus" title="Delete transaction" id="${transaction.id}"></i>
+                     </div>
+                     <hr style="border-color:black;">
+                     <p>Amount: ${transaction.amount}</p>
+                     <p>Date: ${transaction.date}</p>
+                    <p>Description: ${transaction.notes}</p>
+              </div>`;
+              
+        })
+}
+        
 // function injectTransaction(data) {
 //     data.forEach(transaction=>{
 //         const form = document.createElement('div')

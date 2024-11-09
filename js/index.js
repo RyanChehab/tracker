@@ -56,7 +56,7 @@ add_expense.addEventListener('click',function(){
     injectForm("expense")
 })
 
-async function budget(){
+async function Getbudget(){
     try{
         const response = await fetch('backend/budget.php',{
             method: 'POST',
@@ -88,11 +88,9 @@ async function read(){
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    read(); // Automatically call read() when the page loads
+    read(); // Automatically call read
+    Getbudget()
 });
-// const intervalId = setInterval(() => {
-//     read();
-// }, 4500);
 
 // async function to create transactions
 

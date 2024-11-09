@@ -2,11 +2,12 @@
 session_start();
 include "connection.php";
 
-if($_SESSION['REQUEST_METHOD']=="POST"){
+if($_SERVER['REQUEST_METHOD']=="POST"){
+    $user_id = $_SESSION['user_id'];
     
     $incomequery="SELECT sum(amount) as total_income FROM transactions WHERE user_id=? AND type = 'income'";
 
-    $incomeStmt = $connection->prepare($incomeQuery);
+    $incomeStmt = $connection->prepare($incomequery);
 
     $incomeStmt->bind_param("i", $user_id);
  
@@ -36,5 +37,8 @@ if($_SESSION['REQUEST_METHOD']=="POST"){
 
     $current_budget = $total_income - $total_expenses;
 
-    echo json_encode(["current_budget"=> $current_budget]);
+    echo json_encode(["current_budget" => $current_budget]);
+}else{
+    $response = ["message" => "Empty result"];
+    echo json_encode($response);
 }

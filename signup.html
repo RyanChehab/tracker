@@ -8,17 +8,17 @@
     <title>Tracker|signup</title>
 </head>
 <body>
-    <form class="form">
+    <form class="form" action="./backend/signup.php" method="post">
         <div class="form-elem flex">
             <div class="lables flex column">
-                <label for="username">Email</label>
+                <label for="username">Username</label>
+                <label for="email">Email</label>
                 <label for="password">password</label>
-                <label for="verify">verify password</label>
             </div>
             <div class="inputs flex column">
-                <input type="email" id="email-signup" required>
-                <input type="password" id="password-signup" required>
-                <input type="password" id="verify-password" required>
+                <input type="text" name="username" id="username-signup">
+                <input type="email" id="email-signup" name="email" required>
+                <input type="password" id="password-signup" name="password" required>
             </div>
         </div>
         <button type="submit" id="signup-btn" class="signup-btn">Signup</button>

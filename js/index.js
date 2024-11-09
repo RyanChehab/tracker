@@ -65,6 +65,7 @@ async function Getbudget(){
             }
         });
         const data = await response.json();
+        updateBudget(data);
     }catch(error){
         console.error("Error fetching budget:",error)
     }
@@ -80,7 +81,7 @@ async function read(){
             }    
         });
         const data = await response.json();
-        console.log(data)
+        
         displayTransaction(data);
     } catch(error){
         console.error("Error fetching transaction:", error);
@@ -89,8 +90,14 @@ async function read(){
 
 document.addEventListener("DOMContentLoaded", () => {
     read(); // Automatically call read
-    Getbudget()
+    Getbudget();
 });
+
+function updateBudget(data){
+    const budget = document.getElementById('budget')
+    budget.innerText = `    $ ${data.current_budget}`;
+}
+
 
 // async function to create transactions
 
@@ -160,7 +167,7 @@ function injectForm(type) {
 
     portal_top.append(form);
     const saving_btn = document.getElementById('saving-btn');
-saving_btn.addEventListener('click',create);
+    saving_btn.addEventListener('click',create);
 
 // cloing the portal when saving 
 saving_btn.addEventListener('click',()=>{
@@ -170,6 +177,7 @@ saving_btn.addEventListener('click',()=>{
 })
 
 }
+
 // display the transactions in their correct sheets
 function  displayTransaction(data){
     data.forEach(transaction=>{

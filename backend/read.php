@@ -13,7 +13,13 @@ if ($_SERVER["REQUEST_METHOD"]=="POST"){
     $stmt->execute();
 
     $result = $stmt->get_result();
-    
+
+    $transactions = [];
+
+    while($row = $result->fetch_assoc()){
+        $transactions[] = $row;
+    }   
+    echo json_encode($transactions);
 } else{
     $response = ["message" => "Empty result"];
     echo json_encode($response);
